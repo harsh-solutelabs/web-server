@@ -1,21 +1,33 @@
+const path = require('path')
 const express = require("express");
 const app = express();
+console.log(path.join(__dirname,'../public/'))
+// console.log(__dirname)
+// console.log(__filename)
 
-app.get("", (req, res) => {
-  res.send("Hello Expres");
-});
+const publicDirectoryPath= path.join(__dirname,'../public/')
 
-app.get("/help", (req, res) => {
-  res.send("Help Page");
-});
+app.use(express.static(publicDirectoryPath))
+// app.get("", (req, res) => {
+//   res.send("Hello Expres");
+// });
+
+// app.get("/help", (req, res) => {
+//   res.send("Help Page");
+// });
+
+// app.get("/about", (req, res) => {
+//   res.send("About Page");
+// });
 
 app.get("/weather", (req, res) => {
-  res.send("Weather Page");
+  res.send({
+    forecast:'It is snowing',
+    location:'Philadelphia'
+  })
 });
 
-app.get("/about", (req, res) => {
-  res.send("About Page");
-});
+
 
 app.listen(4545, () => {
   console.log("Server is on port 4545");
