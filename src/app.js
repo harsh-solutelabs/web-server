@@ -8,6 +8,28 @@ console.log(path.join(__dirname,'../public/'))
 const publicDirectoryPath= path.join(__dirname,'../public/')
 
 app.use(express.static(publicDirectoryPath))
+
+app.set('view engine','hbs')
+
+
+app.get('',(req,res)=>{
+  res.render('index',{
+    title:'Weather App',
+    Name:'Harsh Mehta'
+  })
+})
+
+app.get('/about',(req,res)=>{
+  res.render('about',{
+    Name:"Harsh Mehta",
+    Created_By:"SoluteLabs"
+  })
+})
+app.get('/help',(req,res)=>{
+  res.render('help',{
+    help_text:"This is helpfull text"
+  })
+})
 // app.get("", (req, res) => {
 //   res.send("Hello Expres");
 // });
@@ -26,8 +48,6 @@ app.get("/weather", (req, res) => {
     location:'Philadelphia'
   })
 });
-
-
 
 app.listen(4545, () => {
   console.log("Server is on port 4545");
