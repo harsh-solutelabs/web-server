@@ -1,15 +1,18 @@
 const request = require("request");
-const foreCast = (longitude, latitude, callback) => {
+const foreCast = (latitude, longitude, callback) => {
+  console.log("LL", latitude, longitude);
   const url =
     "https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b/" +
-    longitude +
+    latitude +
     "," +
-    latitude;
+    longitude;
+  // const url =
+  //   "https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b/70.79836,22.29691";
   request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Enable to Connect Weather App", undefined);
     } else if (body.error) {
-      callback("Unable to find Location", undefined);
+      callback("Unable to find Location - forcast", undefined);
     } else {
       callback(undefined, {
         summary: body.daily.data[0].summary,
@@ -21,10 +24,10 @@ const foreCast = (longitude, latitude, callback) => {
 };
 
 module.exports = foreCast;
-("https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b");
-//Skydark-weather-api----------------------------------------------------
+// ("https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b");
+// Skydark - weather - api----------------------------------------------------;
 // const url =
-//   "https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b/37.8267,-233";
+//   "https://api.darksky.net/https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b/37.8267,-122.4233";
 
 // request({ url: url, json: true }, (error, response) => {
 //   if (error) {

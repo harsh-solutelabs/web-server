@@ -1,6 +1,8 @@
 const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
+const geoCode = require("./utils/geocode");
+const foreCast = require("./utils/forecast");
 const app = express();
 
 //Define paths for Express config
@@ -53,10 +55,24 @@ app.get("/weather", (req, res) => {
       error: "You must provide Address"
     });
   }
-  res.send({
-    forecast: "It is snowing",
-    location: "Philadelphia",
-    address: req.query.address
+  geoCode(req.query.address, (error, { latitude, longitude, location }) => {
+    debugger;
+
+    if (error) {
+      return res.send({ error });
+    }
+
+    foreCast(latitude, longitude, (error, foreCast) => {
+      if (error) {
+        return res.send({ error });
+      }
+
+      res.send({
+        forecast: foreCast,
+        location,
+        address: req.query.address
+      });
+    });
   });
 });
 
@@ -89,5 +105,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(4545, () => {
-  console.log("Server is on port 4545");
+  console.log("Server is on port 3535");
 });
