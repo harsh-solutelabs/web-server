@@ -1,13 +1,11 @@
 const request = require("request");
 const foreCast = (latitude, longitude, callback) => {
-  console.log("LL", latitude, longitude);
   const url =
     "https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b/" +
     latitude +
     "," +
     longitude;
-  // const url =
-  //   "https://api.darksky.net/forecast/04106c915f9369521122a2ba4a67450b/70.79836,22.29691";
+
   request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Enable to Connect Weather App", undefined);

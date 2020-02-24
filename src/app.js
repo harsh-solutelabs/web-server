@@ -21,7 +21,7 @@ hbs.registerPartials(partialsPath);
 app.get("", (req, res) => {
   res.render("index", {
     title: "Weather App",
-    Name: "Harsh Mehta"
+    Name: "Solute-Labs"
   });
 });
 
@@ -55,25 +55,28 @@ app.get("/weather", (req, res) => {
       error: "You must provide Address"
     });
   }
-  geoCode(req.query.address, (error, { latitude, longitude, location }) => {
-    debugger;
+  geoCode(
+    req.query.address,
+    (error, { latitude, longitude, location } = {}) => {
+      debugger;
 
-    if (error) {
-      return res.send({ error });
-    }
-
-    foreCast(latitude, longitude, (error, foreCast) => {
       if (error) {
         return res.send({ error });
       }
 
-      res.send({
-        forecast: foreCast,
-        location,
-        address: req.query.address
+      foreCast(latitude, longitude, (error, foreCast) => {
+        if (error) {
+          return res.send({ error });
+        }
+
+        res.send({
+          forecast: foreCast,
+          location,
+          address: req.query.address
+        });
       });
-    });
-  });
+    }
+  );
 });
 
 app.get("/product", (req, res) => {
@@ -104,6 +107,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(4545, () => {
+app.listen(3535, () => {
   console.log("Server is on port 3535");
 });
