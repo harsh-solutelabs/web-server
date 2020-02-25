@@ -58,8 +58,6 @@ app.get("/weather", (req, res) => {
   geoCode(
     req.query.address,
     (error, { latitude, longitude, location } = {}) => {
-      debugger;
-
       if (error) {
         return res.send({ error });
       }
@@ -107,6 +105,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3535, () => {
-  console.log("Server is on port 3535");
+app.listen(2323, () => {
+  console.log("Server is on port 2323");
 });

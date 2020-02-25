@@ -12,11 +12,15 @@ const foreCast = (latitude, longitude, callback) => {
     } else if (body.error) {
       callback("Unable to find Location - forcast", undefined);
     } else {
-      callback(undefined, {
-        summary: body.daily.data[0].summary,
-        currently: body.currently.temperature,
-        rain_Chances: body.currently.precipProbability
-      });
+      callback(
+        undefined,
+        body.daily.data[0].summary +
+          " It is currently " +
+          body.currently.temperature +
+          " degress out. There is a " +
+          body.currently.precipProbability +
+          "% chance of rain."
+      );
     }
   });
 };

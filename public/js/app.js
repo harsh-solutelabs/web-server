@@ -11,15 +11,16 @@ weatherForm.addEventListener("submit", e => {
   mess1.textContent = "Loading";
   mess2.textContent = "";
   //   console.log("Testing");
-  //   console.log(location);
+  // console.log(location);
 
-  fetch("http://localhost:3535/weather?address=" + location).then(response => {
+  fetch("http://localhost:2323/weather?address=" + location).then(response => {
     response.json().then(data => {
       if (data.error) {
         mess1.textContent = data.error;
       } else {
         mess1.textContent = data.location;
         mess2.textContent = data.forecast;
+        console.log(data.forecast);
       }
     });
   });
