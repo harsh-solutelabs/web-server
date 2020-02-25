@@ -16,7 +16,7 @@ const foreCast = (latitude, longitude, callback) => {
         undefined,
         body.daily.data[0].summary +
           " It is currently " +
-          body.currently.temperature +
+          parseInt((body.currently.temperature - 32) / 1.8) +
           " degress out. There is a " +
           body.currently.precipProbability +
           "% chance of rain."
